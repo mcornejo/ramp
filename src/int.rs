@@ -390,7 +390,8 @@ impl Int {
 
         if i.size > 1 {
             println!("OUT: {:?}", i);
-           // println!("OUT: {:?}", *i.offset(1));
+            println!("BASE: {:?}", base);
+            println!("BASE_u32: {:?}", base as u32);
 
         }
 
