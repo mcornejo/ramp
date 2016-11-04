@@ -190,10 +190,12 @@ unsafe fn to_base_impl<F: FnMut(u8)>(mut len: u32, base: u32, np: Limbs, mut nn:
                     println!("BEFORE");
                     println!("*rp: {:?}", *rp);
                     println!("*rp.offset(1): {:?}", $rp.offset(1).as_const());
+                    println!("*rp.offset(1) {:?}", *rp.offset(1));
                     println!("*big_base: {:?}", big_base);
                     ll::divrem_1($rp, 1, $rp.offset(1).as_const(), $nn, big_base);
                     println!("AFTER");
                     println!("*rp: {:?}", *rp);
+                    println!("*rp.offset(1) {:?}", *rp.offset(1));
                     println!("*rp.offset(1): {:?}", $rp.offset(1).as_const());
                     println!("*big_base: {:?}", big_base);
                     $nn -= if *$rp.offset($nn as isize) == 0 { 1 } else { 0 };
