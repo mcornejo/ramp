@@ -325,10 +325,10 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
         if base == 10 {
             let mut j = digits_per_limb - 1;
             while j > 0 {
-                println!("res_digit: {:?}, j: {:?}, i: {:?}, bp: {:?}", res_digit, j, i, bp);
                 res_digit = res_digit * 10 + ((*bp) as ll::limb::BaseInt);
                 bp = bp.offset(1);
                 j -= 1;
+                println!("res_digit: {:?}, j: {:?}, i: {:?}, bp: {:?}", res_digit, j, i, bp);
             }
         } else {
             let mut j = digits_per_limb - 1;
