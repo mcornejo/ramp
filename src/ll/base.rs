@@ -359,13 +359,17 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
     let mut big_base = base as ll::limb::BaseInt;
     let mut res_digit = Limb((*bp) as ll::limb::BaseInt);
     bp = bp.offset(1);
-    println!("369: big_base: {:?}, res_digit: {:?}", big_base, res_digit);
+    println!("362: big_base: {:?}, res_digit: {:?}", big_base, res_digit);
+    println!("363: out: {:?}", *out);
 
         let mut j = (bs as u32) - (i - digits_per_limb) - 1;
+        println!("j: {:?}", j);
         while j > 0 {
             res_digit = res_digit * (base as ll::limb::BaseInt) + ((*bp) as ll::limb::BaseInt);
+            println!("369: res_digit: {:?}", res_digit);
             bp = bp.offset(1);
             big_base *= base as ll::limb::BaseInt;
+            println!("369: big_base: {:?}", big_base);
             j -= 1;
         }
     
@@ -374,7 +378,7 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
         if res_digit != 0 {
             *out = res_digit;
             size = 1;
-            println!("347: out: {:?}, size: {:?}", *out,  size);
+            println!("381: out: {:?}, size: {:?}", *out,  size);
         }
     } else {
         let mut carry = ll::mul_1(out, out.as_const(), size as i32, Limb(big_base));
