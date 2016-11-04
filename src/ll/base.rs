@@ -341,15 +341,22 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
         println!("341: size: {:?}", size);
         if size == 0 {
             if res_digit != 0 {
+                println!("344: res_digit: {:?}", res_digit);
                 *out = res_digit;
                 size = 1;
+                println!("347: out: {:?}, size: {:?}", *out,  size);
             }
         } else {
             let mut carry = ll::mul_1(out, out.as_const(), size as i32, big_base);
+            println!("351: carry: {:?}", carry);
+            println!("352: out: {:?}", *out);
             carry = carry + ll::add_1(out, out.as_const(), size as i32, res_digit);
+            println!("354: carry: {:?}", carry);
+            println!("355: out: {:?}", *out);
             if carry != 0 {
                 *out.offset(size as isize) = carry;
                 size += 1;
+                println!("359: out: {:?}, size: {:?}", *out,  size);
             }
         }
 
@@ -359,7 +366,7 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
     let mut big_base = base as ll::limb::BaseInt;
     let mut res_digit = Limb((*bp) as ll::limb::BaseInt);
     bp = bp.offset(1);
-    println!("362: big_base: {:?}, res_digit: {:?}", big_base, res_digit);
+    println!("369: big_base: {:?}, res_digit: {:?}", big_base, res_digit);
     if base == 10 {
         let mut j = (bs as u32) - (i - digits_per_limb) - 1;
         while j > 0 {
@@ -367,7 +374,7 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
             big_base *= 10;
             bp = bp.offset(1);
             j -= 1;
-            println!("370: res_digit: {:?}, j: {:?}, i: {:?}, bp: {:?}", res_digit, j, i, bp);
+            println!("377: res_digit: {:?}, j: {:?}, i: {:?}, bp: {:?}", res_digit, j, i, bp);
         }
     } else {
         let mut j = (bs as u32) - (i - digits_per_limb) - 1;
@@ -383,15 +390,23 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
         if res_digit != 0 {
             *out = res_digit;
             size = 1;
+            println!("347: out: {:?}, size: {:?}", *out,  size);
         }
     } else {
         let mut carry = ll::mul_1(out, out.as_const(), size as i32, Limb(big_base));
+        println!("397: carry: {:?}", carry);
+        println!("398: out: {:?}", *out);
         carry = carry + ll::add_1(out, out.as_const(), size as i32, res_digit);
+        println!("400: carry: {:?}", carry);
+        println!("401: out: {:?}", *out);
         if carry != 0 {
             *out.offset(size as isize) = carry;
             size += 1;
+            println!("405: out: {:?}, size: {:?}", *out,  size);
         }
     }
+
+    println!("409: out: {:?}", *out);    
 
     return size;
 }
