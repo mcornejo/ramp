@@ -338,7 +338,7 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
                 j -= 1;
             }
         }
-
+        println!("341: size: {:?}", size);
         if size == 0 {
             if res_digit != 0 {
                 *out = res_digit;
@@ -359,7 +359,7 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
     let mut big_base = base as ll::limb::BaseInt;
     let mut res_digit = Limb((*bp) as ll::limb::BaseInt);
     bp = bp.offset(1);
-
+    println!("362: big_base: {:?}, res_digit: {:?}", big_base, res_digit);
     if base == 10 {
         let mut j = (bs as u32) - (i - digits_per_limb) - 1;
         while j > 0 {
@@ -367,6 +367,7 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
             big_base *= 10;
             bp = bp.offset(1);
             j -= 1;
+            println!("370: res_digit: {:?}, j: {:?}, i: {:?}, bp: {:?}", res_digit, j, i, bp);
         }
     } else {
         let mut j = (bs as u32) - (i - digits_per_limb) - 1;
