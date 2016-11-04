@@ -335,6 +335,18 @@ mod test {
             assert_eq!(add(cp, ap, asz, bp, bsz), 1);
         }
         assert_eq!(c, [4, 1]);
+
+
+        let a; let mut b;
+        let (ap, asz) = make_limbs!(const a, 10);
+        let bp = make_limbs!(out b, 1);
+
+        unsafe {
+            assert_eq!(add_1(bp, ap, asz, Limb(20)), 0);
+        }
+
+        assert_eq!(b, [30]);
+
     }
 
     #[test]
