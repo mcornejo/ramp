@@ -187,8 +187,15 @@ unsafe fn to_base_impl<F: FnMut(u8)>(mut len: u32, base: u32, np: Limbs, mut nn:
                     println!("nn: {:?}", nn);
                     // Divide rp by the big_base, with a single fractional limb produced.
                     // The fractional limb is approximately 1/remainder
+                    println!("BEFORE");
+                    println!("*rp: {:?}", *rp);
+                    println!("*rp.offset(1): {:?}", $rp.offset(1).as_const());
+                    println!("*big_base: {:?}", big_base);
                     ll::divrem_1($rp, 1, $rp.offset(1).as_const(), $nn, big_base);
-
+                    println!("AFTER");
+                    println!("*rp: {:?}", *rp);
+                    println!("*rp.offset(1): {:?}", $rp.offset(1).as_const());
+                    println!("*big_base: {:?}", big_base);
                     $nn -= if *$rp.offset($nn as isize) == 0 { 1 } else { 0 };
                     println!("nn-=: {:?}", nn);
                     let mut frac = *$rp + 1;
