@@ -325,6 +325,9 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
         if base == 10 {
             let mut j = digits_per_limb - 1;
             while j > 0 {
+                println!("pre_res_digit: {:?}, *bp: {:?}", res_digit, *bp);
+                println!("bp as limb: {:?}", ((*bp) as ll::limb::BaseInt));
+                println!("res * 10: {:?}", res_digit * 10);
                 res_digit = res_digit * 10 + ((*bp) as ll::limb::BaseInt);
                 bp = bp.offset(1);
                 j -= 1;
@@ -338,6 +341,7 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
                 j -= 1;
             }
         }
+
         println!("341: size: {:?}", size);
         if size == 0 {
             if res_digit != 0 {
