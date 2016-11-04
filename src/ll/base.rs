@@ -394,7 +394,10 @@ unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u
         }
     }
 
-    println!("409: out: {:?}", *out);    
+    println!("409: out: {:?}", *out);   
+    if size > 1 {
+        println!("409: out+1: {:?}", *out.offset(1));
+    }    
 
     return size;
 }

@@ -388,6 +388,12 @@ impl Int {
             i.size = (size as i32) * sign;
         }
 
+        if i.size > 2 {
+            println!("OUT: {:?}", i);
+           // println!("OUT: {:?}", *i.offset(1));
+
+        }
+
         Ok(i)
     }
 
