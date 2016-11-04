@@ -391,6 +391,8 @@ impl Int {
         if i.size > 1 {
             println!("OUT: {:?}", i);
             println!("OUT_10: {:?}", i.to_str_radix(10, false));
+            println!("OUT_16: {:?}", i.to_str_radix(16, false));
+            println!("OUT_8: {:?}", i.to_str_radix(8, false));
             println!("OUT_2: {:?}", i.to_str_radix(2, false));
             println!("BASE: {:?}", base);
             println!("BASE_u32: {:?}", base as u32);
