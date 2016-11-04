@@ -371,18 +371,20 @@ impl Int {
                     return Err(ParseIntError { kind: ErrorKind::InvalidDigit });
                 }
             };
-
+            
             if b >= base { return Err(ParseIntError { kind: ErrorKind::InvalidDigit }); }
 
             buf.push(b);
         }
-
+        
         let num_digits = ll::base::base_digits_to_len(src.len(), base as u32);
-
+        println!("buf: {:?}", &buf);
+        println!("num_digits: {:?}", num_digits);
         let mut i = Int::with_capacity(num_digits as u32);
 
         unsafe {
             let size = ll::base::from_base(i.limbs_uninit(), buf.as_ptr(), buf.len() as i32, base as u32);
+            println!("size: {:?}", size);
             i.size = (size as i32) * sign;
         }
 

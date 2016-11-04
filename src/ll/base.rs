@@ -309,12 +309,13 @@ pub unsafe fn from_base(mut out: LimbsMut, bp: *const u8, bs: i32, base: u32) ->
 unsafe fn from_base_small(mut out: LimbsMut, mut bp: *const u8, bs: i32, base: u32) -> usize {
     debug_assert!(base > 2);
     assume(base > 2);
-
+    println!("bp: {:?}, bs: {:?}, base: {:?}",bp,bs,base);
     let big_base = BASES.get_unchecked(base as usize).big_base;
     let digits_per_limb = BASES.get_unchecked(base as usize).digits_per_limb;
 
     let mut i = digits_per_limb;
     let mut size : usize = 0;
+    println!("digits_per_limb: {:?}", digits_per_limb);
     while i < (bs as u32) {
         let mut res_digit = Limb((*bp) as ll::limb::BaseInt);
         bp = bp.offset(1);
