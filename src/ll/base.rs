@@ -187,7 +187,7 @@ unsafe fn to_base_impl<F: FnMut(u8)>(mut len: u32, base: u32, np: Limbs, mut nn:
                     // Divide rp by the big_base, with a single fractional limb produced.
                     // The fractional limb is approximately 1/remainder
                     ll::divrem_1($rp, 1, $rp.offset(1).as_const(), $nn, big_base);
-
+                    
                     $nn -= if *$rp.offset($nn as isize) == 0 { 1 } else { 0 };
                     let mut frac = *$rp + 1;
                     // The loop below produces digits from most-significant to least, but
@@ -233,7 +233,7 @@ unsafe fn to_base_impl<F: FnMut(u8)>(mut len: u32, base: u32, np: Limbs, mut nn:
     // by the power-of-two case in to_base. This allows the compiler to unroll the inner
     // loop in the conversion, which is a sigificant speed increase.
     if base == 10 {
-        base_impl!(Limb(10), s, rp, sz, nn);
+        base_impl!(base, s, rp, sz, nn);
     } else {
         base_impl!(base, s, rp, sz, nn);
     }
